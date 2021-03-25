@@ -32,6 +32,7 @@ struct APIClient: API {
             return Fail(outputType: R.ReturnType.self, failure: NetworkRequestError.badRequest).eraseToAnyPublisher()
         }
 
+        // swiftlint:disable nesting
         typealias RequestPublisher = AnyPublisher<R.ReturnType, NetworkRequestError>
         let requestPublisher: RequestPublisher = networkDispatcher.dispatch(request: urlRequest)
         return requestPublisher.eraseToAnyPublisher()
