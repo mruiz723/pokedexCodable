@@ -54,9 +54,7 @@ struct PokemonsView: View {
 
     private func loadData() {
         viewModel.loadTempData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            viewModel.fetchPokemons()
-        }
+        viewModel.fetchPokemons()
     }
 }
 
