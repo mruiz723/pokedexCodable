@@ -29,6 +29,8 @@ struct PokemonsManager: PokemonsManagerProtocol {
     }
 }
 
+// https://pokeapi.co/api/v2/pokemon?offset=0&limit=20
+
 struct PokemonsRequest: Request {
     typealias ReturnType = PageObject
     var path: String = "/pokemon"
@@ -43,6 +45,9 @@ struct PokemonsRequest: Request {
         queryItems = [offsetItem, limitItem]
     }
 }
+
+// https://pokeapi.co/api/v2/pokemon/bulbasaur/ by name
+// https://pokeapi.co/api/v2/pokemon/1/ by id
 
 struct PokemonRequest: Request {
     typealias ReturnType = Pokemon

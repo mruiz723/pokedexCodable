@@ -38,8 +38,8 @@ class PokemonsViewModel: ObservableObject {
                     pageObject.results?.forEach { [weak self] namedAPIResource in
                         guard let self = self else { return }
                         // Fetch Pokemon by id
-                        //                     guard let id = namedAPIResource.url.split(separator: "/").last else { return }
-                        //                     self.pokemonsManager.fetchPokemon(by: String(id))
+//                        guard let id = namedAPIResource.url.split(separator: "/").last else { return }
+//                        self.pokemonsManager.fetchPokemon(by: String(id))
                         self.pokemonsManager.fetchPokemon(by: namedAPIResource.name)
                             .sink(receiveCompletion: { completion in
                                 if case .failure(let error) = completion {
@@ -48,7 +48,8 @@ class PokemonsViewModel: ObservableObject {
                             }, receiveValue: { pokemon in
                                 newPokemons.append(pokemon)
                                 if newPokemons.count == PokemonsManager.limit {
-                                    DispatchQueue.main.async {
+                                    DispatchQueue.main.async { [weak self] in
+                                        guard let self = self else { return }
                                         self.isLoadingPage = false
                                         if PokemonsManager.pokemonsOffset == 20 {
                                             self.pokemons.removeAll()
